@@ -1,7 +1,7 @@
 module.exports = [
   {
-    text: "React",
-    link: "/reactjs/"
+    text: "Hook",
+    link: "/hook/"
   },
   {
     text: "Antd",
