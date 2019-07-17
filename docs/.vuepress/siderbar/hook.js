@@ -1,9 +1,7 @@
-module.exports = {
-  "/hook/": [
-    {
-      title: "Hook",
-      collapsable: false,
-      children: ["useRef", "useMemo", "useState", "useEffect"]
-    }
-  ]
-};
+module.exports = [
+  {
+    title: "Hook",
+    collapsable: false,
+    children: ["useState", "useEffect", "useRef", "useMemo"]
+  }
+];

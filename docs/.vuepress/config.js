@@ -1,5 +1,5 @@
 module.exports = {
-  title: "NoteBook React",
+  title: "React",
   description: "🚀 React攻城笔记",
   base: "/notebook-react/",
   head: [["link", { rel: "icon", href: "/favicon.ico" }]],
