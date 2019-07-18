@@ -4,6 +4,7 @@ module.exports = [
     collapsable: false,
     children: [
       "",
+      "setState",
       "lifecycle",
       "advanced",
       "writing-resilient-components",
