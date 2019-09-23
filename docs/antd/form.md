@@ -4,20 +4,7 @@
 
 ```jsx
 import React from "react";
-import {
-  Select,
-  Input,
-  DatePicker,
-  Button,
-  Form,
-  Row,
-  Col,
-  Tooltip,
-  Icon
-} from "antd";
-
-const { Option } = Select;
-const { RangePicker } = DatePicker;
+import { Input, Form, Row, Col } from "antd";
 
 const formItemLayout = {
   labelCol: {
@@ -55,65 +42,23 @@ const Download = props => {
   };
 
   return (
-    <div>
-      <h3>退款申请</h3>
-      <Form {...formItemLayout} onSubmit={handleDownload}>
-        <Row gutter={24}>
-          <Col span={8}>
-            <Form.Item label="网店名称">
-              {getFieldDecorator("username", {
-                rules: [{ required: true, message: "请选择网店！" }]
-              })(
-                <Select style={{ width: "100%" }}>
-                  <Option value="jack">Jack</Option>
-                  <Option value="lucy">Lucy</Option>
-                  <Option value="disabled" disabled>
-                    Disabled
-                  </Option>
-                  <Option value="Yiminghe">yiminghe</Option>
-                </Select>
-              )}
-            </Form.Item>
-          </Col>
-          <Col span={16}>
-            <Form.Item {...formLargeItemLayout} label="网店单号">
-              <div style={{ position: "relative" }}>
-                {getFieldDecorator("password")(<Input type="password" />)}
-                <Tooltip
-                  title={
-                    <div>
-                      <div>(1) 支持输入多个网店单号，不区分大小写</div>
-                      <div>(2) 多个网店单号用逗号隔开</div>
-                    </div>
-                  }
-                >
-                  <Icon
-                    type="exclamation-circle"
-                    style={{ position: "absolute", right: -18, top: 14 }}
-                  />
-                </Tooltip>
-              </div>
-            </Form.Item>
-          </Col>
-          <Col span={8}>
-            <Form.Item label="网店下单时间">
-              {getFieldDecorator("d")(<RangePicker />)}
-            </Form.Item>
-          </Col>
-          <Col span={16}>
-            <Form.Item label=" " colon={false}>
-              <Button
-                type="primary"
-                htmlType="submit"
-                style={{ float: "right" }}
-              >
-                下载网店订单
-              </Button>
-            </Form.Item>
-          </Col>
-        </Row>
-      </Form>
-    </div>
+    <Form {...formItemLayout} onSubmit={handleDownload}>
+      <Row gutter={24}>
+        <Col span={8}>
+          <Form.Item label="网店名称">
+            {getFieldDecorator("username", {
+              initialValue: "",
+              rules: [{ required: true, message: "请选择网店！" }]
+            })(<Input type="password" />)}
+          </Form.Item>
+        </Col>
+        <Col span={16}>
+          <Form.Item {...formLargeItemLayout} label="网店单号">
+            {getFieldDecorator("password")(<Input type="password" />)}
+          </Form.Item>
+        </Col>
+      </Row>
+    </Form>
   );
 };
 

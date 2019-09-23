@@ -4,7 +4,7 @@
 
 以下例子不一定能运行，只提供下思路，下次用到再整理
 
-```js
+```jsx
 import React from "react";
 import { Form, Upload } from "antd";
 

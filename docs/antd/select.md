@@ -2,6 +2,8 @@
 
 ## defaultProps
 
+下拉框组件默认值
+
 ```js
 const defaultSelectProps = {
   allowClear: true,

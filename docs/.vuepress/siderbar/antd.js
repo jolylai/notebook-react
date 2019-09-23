@@ -2,6 +2,6 @@ module.exports = [
   {
     title: "Ant Design",
     collapsable: false,
-    children: ["upload", "form", "select"]
+    children: ["upload", "form", "select", "modal", "table"]
   }
 ];
