@@ -68,3 +68,88 @@ Download.defaultProps = {
 
 export default Form.create()(Download);
 ```
+
+## 格式化动态表单值
+
+动态生成表单，获取表单值后需要将数据格式化成想要的数据结构时可以使用自定义迭代器, 例如：将
+`{ dec-0-0: "1", dec-0-1: "0", option-0-0: "真的", option-0-1: "假的", question-0: "是真的吗", }` 转换成
+`options: [ { dec: "1" option: "真的" }, { dec: "0" option: "假的" } ]`
+
+```js
+const it = {
+  [Symbol.iterator]() {
+    let index = 0;
+    return {
+      [Symbol.iterator]() {
+        return this;
+      },
+      next() {
+        if (condition) {
+          // 符合条件时返回自定义的数据结构
+          return { value: {}, done: false };
+        }
+        // 结束迭代
+        return { done: true };
+      },
+      return(v) {
+        return { value: v, done: true };
+      }
+    };
+  }
+};
+
+for (let value of it) {
+  // 每次迭代一个符合条件时返回自定义的数据
+}
+```
+
+```js
+import omit from "omit.js";
+
+formatFieldsValue = values => {
+  let restValue = { ...values };
+  const Ques = {
+    [Symbol.iterator]() {
+      let index = 0;
+      return {
+        [Symbol.iterator]() {
+          return this;
+        },
+        next() {
+          const current = values[`question-${index}`];
+          if (current) {
+            let options = [];
+            for (
+              let j = 0;
+              values[`option-${index}-${j}`] && values[`dec-${index}-${j}`];
+              j++
+            ) {
+              options = options.concat({
+                option: values[`option-${index}-${j}`],
+                dec: values[`dec-${index}-${j}`]
+              });
+              restValue = omit(restValue, [
+                `question-${index}`,
+                `option-${index}-${j}`,
+                `dec-${index}-${j}`
+              ]);
+            }
+            index++;
+            return { value: { question: current, options }, done: false };
+          }
+          index = 0;
+          return { done: true };
+        },
+        return(v) {
+          return { value: v, done: true };
+        }
+      };
+    }
+  };
+  let questions = [];
+  for (let key of Ques) {
+    questions = questions.concat(key);
+  }
+  return { ...restValue, questions };
+};
+```
