@@ -7,7 +7,7 @@ module.exports = [
   {
     title: "Utils",
     collapsable: false,
-    children: ["utils", "regexp", "file-saver", "clipboard"]
+    children: ["utils", "regexp", "file-saver", "clipboard", "address"]
   },
   {
     title: "部署",
