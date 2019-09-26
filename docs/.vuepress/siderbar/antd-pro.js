@@ -2,7 +2,16 @@ module.exports = [
   {
     title: "Ant Design Pro",
     collapsable: false,
-    children: ["", "start", "dva", "block", "env", "request", "authority"]
+    children: [
+      "",
+      "start",
+      "dva",
+      "block",
+      "env",
+      "request",
+      "authority",
+      "mock"
+    ]
   },
   {
     title: "Utils",
