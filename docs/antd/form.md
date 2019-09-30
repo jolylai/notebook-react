@@ -153,3 +153,57 @@ formatFieldsValue = values => {
   return { ...restValue, questions };
 };
 ```
+
+解决动态生成表单的数据显示问题
+
+```js
+import React, { PureComponent } from "react";
+import { Form, Input, Button } from "antd";
+
+@Form.create({
+  name: "global_state",
+  onFieldsChange(props, changedFields) {
+    props.onChange(changedFields);
+  },
+  mapPropsToFields(props) {
+    return {
+      username: Form.createFormField({
+        ...props.username,
+        value: props.username.value
+      })
+    };
+  },
+  onValuesChange(_, values) {
+    console.log(values);
+  }
+})
+export default class Questions extends PureComponent {
+  render() {
+    const {
+      list,
+      onAddQuestion,
+      onDeleteQuestion,
+      onAddOption,
+      onDeleteOption,
+      form: { getFieldDecorator }
+    } = this.props;
+    return (
+      <Form>
+        {list.map((question, index) => (
+          <React.Fragment key={question.key}>
+            <Form.Item key={question.key} label={`题目${index + 1}`}>
+              {getFieldDecorator(`question-${index}`, {
+                rules: [{ required: true, message: "请输入题目" }]
+              })(<Input placeholder="请输入题目" />)}
+              <Button onClick={onAddQuestion}>添加</Button>
+              <Button onClick={() => onDeleteQuestion(index)} type="danger">
+                删除
+              </Button>
+            </Form.Item>
+          </React.Fragment>
+        ))}
+      </Form>
+    );
+  }
+}
+```
