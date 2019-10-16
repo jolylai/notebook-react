@@ -22,5 +22,10 @@ module.exports = [
     title: "部署",
     collapsable: false,
     children: ["deploy"]
+  },
+  {
+    title: "地图",
+    collapsable: false,
+    children: ["tmap"]
   }
 ];
