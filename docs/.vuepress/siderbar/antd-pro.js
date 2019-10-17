@@ -10,8 +10,7 @@ module.exports = [
       "env",
       "request",
       "authority",
-      "mock",
-      "code"
+      "mock"
     ]
   },
   {
@@ -20,9 +19,9 @@ module.exports = [
     children: ["utils", "regexp", "file-saver", "clipboard", "address"]
   },
   {
-    title: "部署",
+    title: "工程化",
     collapsable: false,
-    children: ["deploy"]
+    children: ["code", "deploy"]
   },
   {
     title: "地图",

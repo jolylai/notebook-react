@@ -32,3 +32,31 @@ export function digitUppercase(n) {
     .replace(/^整$/, "零元整");
 }
 ```
+
+## 连字符转驼峰
+
+```js
+export function hyphenToHump() {
+  return this.replace(/-(\w)/g, (...args) => {
+    return args[1].toUpperCase();
+  });
+}
+```
+
+## 驼峰转连字符
+
+```js
+export function humpToHyphen() {
+  return this.replace(/([A-Z])/g, "-$1").toLowerCase();
+}
+```
+
+## 否为完整的 http 接口
+
+```js
+const reg = /(((^https?:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)$/g;
+
+export function isUrl(path) {
+  return reg.test(path);
+}
+```
