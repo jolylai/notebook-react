@@ -154,7 +154,7 @@ formatFieldsValue = values => {
 };
 ```
 
-解决动态生成表单的数据显示问题
+解决动态生成表单删除某个字段后的数据显示问题
 
 ```js
 import React, { PureComponent } from "react";

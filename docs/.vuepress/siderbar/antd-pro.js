@@ -21,7 +21,7 @@ module.exports = [
   {
     title: "工程化",
     collapsable: false,
-    children: ["code", "deploy"]
+    children: ["code", "deploy", "keep-alive"]
   },
   {
     title: "地图",
