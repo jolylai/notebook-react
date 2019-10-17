@@ -10,7 +10,8 @@ module.exports = [
       "env",
       "request",
       "authority",
-      "mock"
+      "mock",
+      "code"
     ]
   },
   {
