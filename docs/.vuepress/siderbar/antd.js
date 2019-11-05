@@ -7,6 +7,6 @@ module.exports = [
   {
     title: "表单",
     collapsable: false,
-    children: ["field"]
+    children: ["form-submit", "form-layout", "field", "form-custom", "filter"]
   }
 ];
