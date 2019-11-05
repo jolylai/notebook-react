@@ -1,6 +1,96 @@
 # 多环境配置
 
+`umi` 允许在 `.umirc.js` 或 `config/config.js` （二选一，.umirc.js 优先）中进行配置，支持 ES6 语法。
+
+企业开发中通常会区分多个不同的环境，比如开发环境，测试环境，正式环境。不同个环境中需要请求不同的接口。
+
+## UMI_ENV
+
+创建不同环境的配置文件，这里我们区分开发（dev）、测试（qa）、生产（prod）三种不同的环境
+
+在不同的环境下我们需要不同的配置，这时我们可以在 config 文件夹中创建不同环境下使用的配置文件，比如我们需要 `dev`, `qa`, `prod`,三个不同的环境，这时可以在根目录下的 config 文件夹中创建
+分别创建`config.js` ,`config.qa.js` ,`config.prod.js`
+
+开发环境配置文件
+
+```js
+// .umirc.js 或者 config/config.js
+export default {
+  define: {
+    DOMAIN: "http://dev"
+  }
+};
+```
+
+测试环境配置文件
+
+```js
+// .umirc.qa.js 或者 config/config.qa.js
+export default {
+  define: {
+    DOMAIN: "http://qa"
+  }
+};
+```
+
+生产环境配置文件
+
+```js
+// .umirc.prod.js 或者 config/config.prod.js
+export default {
+  define: {
+    DOMAIN: "http://prod"
+  }
+};
+```
+
+配置 `package.json`
+
+```json
+{
+  "scripts": {
+    "start": "umi dev",
+    "qa": "cross-env UMI_ENV=qa umi dev",
+    "prod": "cross-env UMI_ENV=prod umi build"
+  }
+}
+```
+
+这时我们使用不同环境时只需要执行对应的命名就可以了
+
+```bash
+# dev 环境
+$ yarn run dev
+
+# qa 环境
+$ yarn run qa
+
+# prod 环境
+$ yarn run prod
+```
+
+- 执行`yarn start` 这时 `DOMAI` 是 `http://dev`
+- 执行`yarn qa` 这时 `DOMAI` 是 `http://qa`
+- 执行`yarn prod` 这时 `DOMAI` 是 `http://prod`
+
+本地配置文件
+
+```js
+// .umirc.local.js  或者 config/config.local.js
+export default {
+  define: {
+    DOMAIN: "http://local"
+  }
+};
+```
+
+`.umirc.local.js` 是本地的配置文件，不要提交到 `git`，所以通常需要配置到 `.gitignore`。如果存在，会和 `.umirc.js` 合并后再返回。
+
+如果存在 `.umirc.local.js` 或者 `config/config.local.js` 且有定义 `DOMAIN`, 这时是`.umirc.local.js` 或者 `config/config.local.js`中定义的值
+
 ## cross-env
+
+自定义环境变量，这里我们定义 `ENV_TAG` 环境变量
 
 配置 `package.json`
 
@@ -43,36 +133,6 @@ export default {
     baseURL
   }
 };
-```
-
-## 不同 config 文件
-
-在不同的环境下我们需要不同的配置，这时我们可以在 config 文件夹中创建不同环境下使用的配置文件，比如我们需要 `dev`, `qa`, `prod`,三个不同的换件，这时可以在根目录下的 config 文件夹中创建
-分别创建`config.dev.js` ,`config.qa.js` ,`config.prod.js`
-
-配置 `package.json`
-
-```json {3,4,5}
-{
-  "scripts": {
-    "dev": "cross-env UMI_ENV=dev umi dev",
-    "qa": "cross-env UMI_ENV=qa umi dev",
-    "prod": "cross-env UMI_ENV=prod umi build"
-  }
-}
-```
-
-这时我们使用不同环境时只需要执行对应的命名就可以了
-
-```bash
-# dev 环境
-$ yarn run dev
-
-# qa 环境
-$ yarn run qa
-
-# prod 环境
-$ yarn run prod
 ```
 
 ## config 文件
@@ -171,10 +231,10 @@ export default {
     "primary-color": primaryColor
   },
   proxy: {
-    '/api/': {
-      target: 'http://****',
-      changeOrigin: true,
-    },
+    "/api/": {
+      target: "http://****",
+      changeOrigin: true
+    }
   },
   ignoreMomentLocale: true,
   lessLoaderOptions: {
