@@ -1,8 +1,6 @@
 # Field
 
-根据配置对象生成对应的表单项
-
-## props
+根据 props 中的 type 属性渲染不同的表单基础组件，props 中的其他属性为要渲染的组件的属性
 
 ```jsx
 import * as React from "react";
@@ -150,3 +148,8 @@ class Field extends React.Component {
 
 export default Field;
 ```
+
+## 思考
+
+- 在组件中同时引入了多个组件，如果在项目中大量应用会不会产生性能问题
+- 可不可以用`react-loadable`优化
