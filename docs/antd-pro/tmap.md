@@ -121,9 +121,10 @@ export default class App extends PureComponent {
 
 ```js
 const getLocalCity = function() {
-  return new Promise(resolve => {
+  return new Promise((resolve, reject) => {
     const CityService = new window.qq.maps.CityService({
-      complete: result => resolve(result)
+      complete: reject,
+      error: reject
     });
 
     CityService.searchLocalCity();
@@ -135,9 +136,10 @@ const getLocalCity = function() {
 
 ```js
 const getPositionByAddress = address => {
-  return new Promise(resolve => {
+  return new Promise((resolve, reject) => {
     const Geocoder = new window.qq.maps.Geocoder({
-      complete: result => resolve(result)
+      complete: resolve,
+      error: reject
     });
 
     Geocoder.getLocation(address);

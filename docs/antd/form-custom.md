@@ -1,6 +1,104 @@
 # 自定义表单
 
-## 数据格式
+## 共有属性
+
+```js
+{
+  label: 'label',
+  name: 'name',
+  type: "Switch",
+
+  disabled: true,
+  show: true,
+  defaultValue: 1
+}
+```
+
+## Input
+
+```js
+const fields = [
+  {
+    name: "Input",
+    label: "Input",
+    type: "Input",
+    placeholder: "请选择",
+    addonAfter: (
+      <Icon
+        type="search"
+        onClick={() => {
+          this.handleSelectOrg();
+        }}
+      />
+    )
+  }
+];
+```
+
+## Switch
+
+```js
+const fields = [
+  {
+    name: "singinFlg",
+    label: "是否签到",
+    type: "Switch",
+    checkedChildren: "是",
+    unCheckedChildren: "否"
+  }
+];
+```
+
+## Radio
+
+```js
+const fields = [
+  {
+    name: "Radio",
+    label: "Radio",
+    type: "Radio",
+    options: [{ label: "Radio", value: 1 }]
+  }
+];
+```
+
+如果 label 和 value 是相同的则可以为字符串数组
+
+```js
+const fields = [
+  {
+    name: "Radio",
+    label: "Radio",
+    type: "Radio",
+    options: ["Apple", "Banana"]
+  }
+];
+```
+
+## RangePicker
+
+```js
+const fields = [
+  {
+    name: "RangePicker",
+    label: "RangePicker",
+    type: "RangePicker"
+  }
+];
+```
+
+## Custom
+
+```js
+const fields = [
+  {
+    name: "Custom",
+    type: "Custom",
+    label: "Custom",
+    node: <div>Plain</div>
+  }
+];
+```
 
 ```js
 const fields = [
