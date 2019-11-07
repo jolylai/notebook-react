@@ -11,5 +11,10 @@ module.exports = [
       "derived-state",
       "memoization"
     ]
+  },
+  {
+    title: "API",
+    collapsable: false,
+    children: ["refs"]
   }
 ];
