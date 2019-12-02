@@ -19,4 +19,6 @@ footer: Copyright © 2019-present Jolylai
 - [前端早报](https://github.com/sorrycc/zaobao/issues)
 - [react-router](https://reacttraining.com/react-router/)
 
+## TODO
 
+- [Concurrent Mode 与 Suspense](https://mp.weixin.qq.com/s/JF6jm70l5U3btUdLsgnCNg)

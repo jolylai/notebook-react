@@ -2,6 +2,38 @@
 
 更详细的 [api 文档](https://github.com/umijs/umi-request)
 
+## 实例化通用配置
+
+请求一般都有一些通用的配置，我们不想在每个请求里去逐个添加，例如通用的前缀、后缀、头部信息、异常处理等等，那么可以通过 extend 来新建一个 umi-request 实例，从而减少重复的代码量：
+
+```js
+import { extend } from "umi-request";
+
+const request = extend({
+  prefix: "/api/v1",
+  suffix: ".json",
+  timeout: 1000,
+  headers: {
+    "Content-Type": "multipart/form-data"
+  },
+  params: {
+    token: "xxx" // 所有请求默认带上 token 参数
+  },
+  errorHandler: function(error) {
+    /* 异常处理 */
+  }
+});
+
+request
+  .get("/user")
+  .then(function(response) {
+    console.log(response);
+  })
+  .catch(function(error) {
+    console.log(error);
+  });
+```
+
 ```js
 import request, { extend } from "umi-request";
 import { isUrl } from "@/utils/utils";
@@ -95,3 +127,7 @@ const newRequest = extend({
 
 export default newRequest;
 ```
+
+## Resource
+
+- [umi-request 网络请求之路 ](https://www.yuque.com/mayiprototeam/gfyt69/ggqy8q)
