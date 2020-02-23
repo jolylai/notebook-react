@@ -1,18 +1,39 @@
 # useRef
 
-## Ref 和 DOM
+> Refs 提供了一种方式，允许我们访问 DOM 节点或在 render 方法中创建的 React 元素。
 
-在某些情况下，你需要在典型数据流之外强制修改子组件。被修改的子组件可能是一个 React 组件的实例，也可能是一个 DOM 元素。对于这两种情况，React 都提供了解决办法。
+```js
+const refContainer = useRef(initialValue);
+```
 
-避免使用 refs 来做任何可以通过声明式实现来完成的事情。
+useRef 返回一个可变的 ref 对象，其 .current 属性被初始化为传入的参数（initialValue）。返回的 ref 对象在组件的整个生命周期内保持不变。
 
-### 勿过度使用 Refs
+```js
+function TextInputWithFocusButton() {
+  const inputEl = useRef(null);
+  // inputEl { current: null  }
 
-你可能首先会想到使用 refs 在你的 app 中“让事情发生”。如果是这种情况，请花一点时间，认真再考虑一下 state 属性应该被安排在哪个组件层中。通常你会想明白，让更高的组件层级拥有这个 state，是更恰当的。查看 状态提升 以获取更多有关示例。
+  const onButtonClick = () => {
+    // `current` 指向已挂载到 DOM 上的文本输入元素
+    inputEl.current.focus();
+  };
+  return (
+    <>
+      <input ref={inputEl} type="text" />
+      <button onClick={onButtonClick}>Focus the input</button>
+    </>
+  );
+}
+```
+
+::: tip
+1、请记住，当 ref 对象内容发生变化时，useRef 并不会通知你。
+2、变更 .current 属性不会引发组件重新渲染。
+:::
 
 ## 不仅仅是 ref
 
-ref 对象是一个 current 属性可变且可以容纳任意值的通用容器，类似于一个 class 的实例属性。
+useRef() 比 ref 属性更有用。它可以很方便地保存任何可变值，其类似于在 class 中使用实例字段的方式。
 
 ```js
 function Timer() {

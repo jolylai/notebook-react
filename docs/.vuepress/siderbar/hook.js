@@ -1,7 +1,14 @@
 module.exports = [
   {
-    title: "Hook",
+    title: "React",
     collapsable: false,
-    children: ["", "useState", "useEffect", "useRef", "useMemo"]
+    children: [
+      "",
+      "useState",
+      "useEffect",
+      "useRef",
+      "useMemo",
+      "useImperativeHandle"
+    ]
   }
 ];
